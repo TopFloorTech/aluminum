@@ -1,0 +1,11 @@
+aluminum_follow_block:
+  facebook_enabled: True
+  facebook_weight: 10
+  twitter_enabled: True
+  twitter_weight: 20
+  linkedin_enabled: True
+  linkedin_weight: 30
+  youtube_enabled: True
+  youtube_weight: 40
+  google_plus_enabled: True
+  google_plus_weight: 50

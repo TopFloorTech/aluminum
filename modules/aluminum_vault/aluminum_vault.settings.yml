@@ -1,0 +1,18 @@
+aluminum_vault:
+  general:
+    base_icon_class: fa-icon
+  facebook:
+    facebook_icon_class: fa-facebook
+    facebook_page_url: "https://www.facebook.com/"
+  google_plus:
+    google_plus_icon_class: fa-google-plus
+    google_plus_page_url: "https://plus.google.com/"
+  linkedin:
+    linkedin_icon_class: fa-linkedin
+    linkedin_page_url: "https://www.linkedin.com/company/"
+  twitter:
+    twitter_icon_class: fa-twitter
+    twitter_page_url: "https://twitter.com/"
+  youtube:
+    youtube_icon_class: fa-youtube
+    youtube_page_url: "https://www.youtube.com/user/"

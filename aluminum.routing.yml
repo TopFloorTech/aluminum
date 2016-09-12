@@ -1,0 +1,7 @@
+aluminum_vault.admin:
+  path: '/admin/config/aluminum'
+  defaults:
+    _controller: '\Drupal\aluminum\Controller\AluminumAdminController::content'
+    _title: 'Aluminum'
+  requirements:
+    _permission: 'administer aluminum'
