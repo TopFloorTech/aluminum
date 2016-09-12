@@ -1,4 +1,4 @@
-name: Aluminum core
+name: Aluminum Core
 type: module
 description: "Provides a pluggable set of building blocks for composing a website."
 version: 8.x-1.0-alpha1
