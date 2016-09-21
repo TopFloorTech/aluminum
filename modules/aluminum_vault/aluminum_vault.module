@@ -30,31 +30,33 @@ function aluminum_vault_social_networks() {
 function aluminum_vault_phone_numbers() {
   return [
     'phone_number_toll_free' => [
-      'title' => $this->t('Toll-free phone number'),
-      'short_title' => 'T',
-      'description' => $this->t('If available, set the primary toll-free phone number which will have priority.'),
+      'title' => t('Toll-free phone number'),
+      'short_title' => 'TF',
+      'description' => t('If available, set the primary toll-free phone number which will have priority.'),
     ],
     'phone_number' => [
-      'title' => $this->t('Phone number'),
-      'short_title' => 'P',
-      'description' => $this->t('Set the main standard (non-toll-free) phone number.'),
+      'title' => t('Phone number'),
+      'short_title' => 'PH',
+      'description' => t('Set the main standard (non-toll-free) phone number.'),
     ],
     'fax_number' => [
-      'title' => $this->t('Fax number'),
+      'title' => t('Fax number'),
       'short_title' => 'F',
-      'description' => $this->t('If available, set the fax number.'),
+      'description' => t('If available, set the fax number.'),
     ],
   ];
 }
 
 function aluminum_vault_config($group = null) {
-  $config_name = 'config.aluminum_vault';
+  $config_name = 'aluminum_vault';
+
+  $config = \Drupal::config('aluminum_vault.settings');
 
   if (!empty($group)) {
     $config_name .= '.' . $group;
   }
 
-  return Drupal::config($config_name);
+  return $config->get($config_name);
 }
 
 /**
@@ -91,8 +93,8 @@ function aluminum_vault_aluminum_vault_config() {
   // General config
   $config['base_icon_class'] = [
     '#type' => 'textfield',
-    '#title' => $this->t('Base icon class'),
-    '#description' => $this->t('This class string will be prepended to any other icon classes that are output.'),
+    '#title' => t('Base icon class'),
+    '#description' => t('This class string will be prepended to any other icon classes that are output.'),
     '#vault_group' => 'general',
   ];
 
@@ -110,15 +112,15 @@ function aluminum_vault_aluminum_vault_config() {
   foreach (aluminum_vault_social_networks() as $id => $name) {
     $config[$id . '_icon_class'] = [
       '#type' => 'textfield',
-      '#title' => $this->t($name . ' icon class'),
-      '#description' => $this->t('This icon class will be used to represent ' . $name . '.'),
+      '#title' => t($name . ' icon class'),
+      '#description' => t('This icon class will be used to represent ' . $name . '.'),
       '#vault_group' => $id,
     ];
 
     $config[$id . '_page_url'] = [
       '#type' => 'textfield',
-      '#title' => $this->t($name . ' page URL'),
-      '#description' => $this->t('The URL used when linking to this site\'s ' . $name . ' page.'),
+      '#title' => t($name . ' page URL'),
+      '#description' => t('The URL used when linking to this site\'s ' . $name . ' page.'),
       '#vault_group' => $id,
     ];
   }

@@ -1,0 +1,4 @@
+administer aluminum:
+  title: 'Administer Aluminum'
+  description: 'Configure Aluminum and its sub-modules'
+  restrict access: TRUE

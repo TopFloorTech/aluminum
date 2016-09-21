@@ -13,7 +13,7 @@ use Drupal\Core\Url;
 /**
  * Provides a 'Phone number' block
  *
- * @block(
+ * @Block(
  *     id = "aluminum_phone_number",
  *     admin_label = @Translation("Phone number"),
  * )
@@ -44,19 +44,18 @@ class AluminumPhoneNumberBlock extends AluminumBlockBase {
     ];
   }
 
-  protected function getLink($type) {
-    $phone_number = aluminum_vault_config('contact_info.' . $type);
-    $url = Url::fromUri('tel:+1 ' . $phone_number);
-
-    return Link::fromTextAndUrl($phone_number, $url);
-  }
-
   /**
    * {@inheritdoc}
    */
   public function build() {
+    $type = $this->getOptionValue('phone_number_type');
+    $phone_number = aluminum_vault_config('contact_info.' . $type);
+    $url = Url::fromUri('tel:+1 ' . $phone_number);
+
     return [
-      '#markup' => sprintf('<p>%s</p>', $this->getLink($this->getOptionValue('phone_number_type'))),
+        '#theme' => 'aluminum_phone_number',
+        '#phone_number' => $phone_number,
+        '#url' => $url,
     ];
   }
 }

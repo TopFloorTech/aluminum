@@ -6,7 +6,7 @@
  * Time: 10:50 PM
  */
 
-namespace Drupal\aluminum\Aluminum\Vault;
+namespace Drupal\aluminum_vault;
 
 
 use Drupal\Core\Config\Config;
@@ -71,13 +71,13 @@ class VaultConfig {
     return ucfirst(str_replace('_', ' ', $id));
   }
 
-  public function getOptionValue($option, FormStateInterface $form_state, Config $config = null) {
-    $state_value = ['aluminum_vault', $option['#vault_group'], $option['#vault_id']];
+  public function getOptionValue($option, FormStateInterface $form_state = null) {
+    $config = aluminum_vault_config($option['#vault_group']);
 
-    if ($form_state->hasValue($state_value)) {
-      $value = $form_state->getValue($state_value);
-    } elseif (!is_null($config) && !is_null($config->get($option['#vault_id']))) {
-      $value = $config->get($option['#vault_id']);
+    if (!is_null($form_state) && $form_state->hasValue($option['#vault_id'])) {
+      $value = $form_state->getValue($option['#vault_id']);
+    } elseif (isset($config[$option['#vault_id']])) {
+      $value = $config[$option['#vault_id']];
     } elseif (isset($option['#default_value'])) {
       $value = $option['##default_value'];
     } else {

@@ -7,13 +7,11 @@
  */
 
 namespace Drupal\aluminum_blocks\Plugin\Block;
-use Drupal\Core\Link;
-use Drupal\Core\Url;
 
 /**
  * Provides a 'Follow links' block
  *
- * @block(
+ * @Block(
  *     id = "aluminum_follow",
  *     admin_label = @Translation("Follow links"),
  * )
@@ -39,7 +37,7 @@ class AluminumFollowBlock extends AluminumBlockBase {
         '#type' => 'textfield',
         '#title' => $this->t($name . ' weight'),
         '#description' => $this->t('This integer defines the weight of ' . $name . ' in relation to other links.'),
-        '#default_value' => 10,
+        '#default_value' => $weight,
       ];
 
       $weight += 10;
@@ -49,11 +47,12 @@ class AluminumFollowBlock extends AluminumBlockBase {
   }
 
   protected function iconClass($id) {
-    $base_class = aluminum_vault_config('general.base_icon_class');
-    $class = aluminum_vault_config($id . '.' . $id . '_icon_class');
+    $config = aluminum_vault_config();
 
-    if (!empty($base_class)) {
-      $class = $base_class . ' ' . $class;
+    $class = $config[$id][$id . '_icon_class'];
+
+    if (!empty($config['general']['base_icon_class'])) {
+      $class = $config['general']['base_icon_class'] . ' ' . $class;
     }
 
     return $class;
@@ -63,19 +62,19 @@ class AluminumFollowBlock extends AluminumBlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $icon_template = '<i class="%s"></i>';
+    $config = aluminum_vault_config();
+
     $items = [];
-
     foreach (aluminum_vault_social_networks() as $id => $name) {
-      $url = Url::fromUri($this->getOptionValue($id . '_page_url'));
-      $icon = sprintf($icon_template, $this->iconClass($id));
-
-      $items[] = Link::fromTextAndUrl($icon, $url);
+      $items[] = [
+        'url' => $config[$id][$id . '_page_url'],
+        'icon_class' => $this->iconClass($id),
+      ];
     }
 
     return [
-      '#theme' => 'item_list',
-      '#items' => $items,
+      '#theme' => 'aluminum_follow_list',
+      '#list' => $items,
     ];
   }
 }

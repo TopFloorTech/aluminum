@@ -1,5 +1,5 @@
-aluminum_vault.admin:
-  path: '/admin/config/aluminum'
+aluminum.admin:
+  path: '/admin/config/development/aluminum'
   defaults:
     _controller: '\Drupal\aluminum\Controller\AluminumAdminController::content'
     _title: 'Aluminum'

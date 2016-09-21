@@ -13,7 +13,7 @@ use Drupal\Core\Url;
 /**
  * Provides a 'Phone number list' block
  *
- * @block(
+ * @Block(
  *     id = "aluminum_phone_number_list",
  *     admin_label = @Translation("Phone number list"),
  * )
@@ -53,13 +53,6 @@ class AluminumPhoneNumberListBlock extends AluminumBlockBase {
     return $options;
   }
 
-  protected function getLink($type) {
-    $phone_number = aluminum_vault_config('contact_info.' . $type);
-    $url = Url::fromUri('tel:+1 ' . $phone_number);
-
-    return Link::fromTextAndUrl($phone_number, $url);
-  }
-
   protected function getList() {
     $enabled = array_keys(array_filter($this->getOptionValue('enabled_phone_numbers')));
     $phone_numbers = aluminum_vault_phone_numbers();
@@ -68,10 +61,16 @@ class AluminumPhoneNumberListBlock extends AluminumBlockBase {
     $list = [];
 
     foreach ($enabled as $type) {
-      $key = $display_short_titles ? 'title' : 'short_title';
+      $key = $display_short_titles ? 'short_title' : 'title';
       $title = $phone_numbers[$type][$key];
 
-      $list[$title] = $this->getLink($type);
+      $phone_number = aluminum_vault_config('contact_info.' . $type);
+
+      $list[] = [
+        'title' => $title,
+        'phone_number' => $phone_number,
+        'url' => 'tel:+1 ' . $phone_number,
+      ];
     }
 
     return $list;

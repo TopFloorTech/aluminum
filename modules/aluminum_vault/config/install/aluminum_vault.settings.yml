@@ -1,6 +1,6 @@
 aluminum_vault:
   general:
-    base_icon_class: fa-icon
+    base_icon_class: fa
   facebook:
     facebook_icon_class: fa-facebook
     facebook_page_url: "https://www.facebook.com/"

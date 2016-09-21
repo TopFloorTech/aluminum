@@ -11,7 +11,7 @@ namespace Drupal\aluminum_blocks\Plugin\Block;
 /**
  * Provides a 'Copyright information' block
  *
- * @block(
+ * @Block(
  *     id = "aluminum_copyright",
  *     admin_label = @Translation("Copyright information"),
  * )
