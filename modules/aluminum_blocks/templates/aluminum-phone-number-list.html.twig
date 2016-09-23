@@ -1,6 +1,6 @@
-<dl class="aluminum-phone-numbers">
+<dl class="AluminumPhoneNumberList">
     {% for link in list %}
-        <dt class="aluminum-phone-numbers__title">{{ link.title }}</dt>
-        <dd class="aluminum-phone-numbers__definition"><a class="aluminum-phone-numbers__link" href="{{ link.url }}">{{ link.phone_number }}</a></dd>
+        <dt class="AluminumPhoneNumberList-title">{{ link.title }}</dt>
+        <dd class="AluminumPhoneNumberList-definition"><a class="AluminumPhoneNumberList-link" href="{{ link.url }}">{{ link.phone_number }}</a></dd>
     {% endfor %}
 </dl>
