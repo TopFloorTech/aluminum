@@ -58,23 +58,42 @@ class AluminumFollowBlock extends AluminumBlockBase {
     return $class;
   }
 
+  protected function getSocialNetworks() {
+    $config = aluminum_vault_config();
+
+    $socialNetworks = aluminum_vault_social_networks();
+
+    $networks = [];
+
+    foreach ($socialNetworks as $id => $name) {
+      if ($this->getOptionValue($id . '_enabled')) {
+        $networks[$id] = [
+          'name' => $name,
+          'weight' => $this->getOptionValue($id . '_weight'),
+          'url' => $config[$id][$id . '_page_url'],
+          'icon_class' => $this->iconClass($id)
+        ];
+      }
+    }
+
+    usort($networks, function ($a, $b) {
+      if ($a['weight'] == $b['weight']) {
+        return 0;
+      }
+
+      return ($a['weight'] < $b['weight']) ? -1 : 1;
+    });
+
+    return $networks;
+  }
+
   /**
    * {@inheritdoc}
    */
   public function build() {
-    $config = aluminum_vault_config();
-
-    $items = [];
-    foreach (aluminum_vault_social_networks() as $id => $name) {
-      $items[] = [
-        'url' => $config[$id][$id . '_page_url'],
-        'icon_class' => $this->iconClass($id),
-      ];
-    }
-
     return [
       '#theme' => 'aluminum_follow_list',
-      '#list' => $items,
+      '#list' => $this->getSocialNetworks(),
     ];
   }
 }
