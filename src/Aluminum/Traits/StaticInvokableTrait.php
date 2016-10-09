@@ -10,12 +10,18 @@ namespace Drupal\aluminum\Aluminum\Traits;
 
 
 trait StaticInvokableTrait {
+  protected static $hookData = [];
+
   protected static function invokeHook($hookName) {
-    $moduleHandler = \Drupal::moduleHandler();
+    if (!isset(self::$hookData[$hookName])) {
+      $moduleHandler = \Drupal::moduleHandler();
 
-    $data = $moduleHandler->invokeAll($hookName);
-    $moduleHandler->alter($hookName, $data);
+      $data = $moduleHandler->invokeAll($hookName);
+      $moduleHandler->alter($hookName, $data);
 
-    return $data;
+      self::$hookData[$hookName] = $data;
+    }
+
+    return self::$hookData[$hookName];
   }
 }

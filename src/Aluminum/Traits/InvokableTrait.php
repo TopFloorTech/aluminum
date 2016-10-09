@@ -10,12 +10,18 @@ namespace Drupal\aluminum\Aluminum\Traits;
 
 
 trait InvokableTrait {
+  protected $hookData = [];
+
   protected function invokeHook($hookName) {
-    $moduleHandler = \Drupal::moduleHandler();
+    if (!isset($this->hookData[$hookName])) {
+      $moduleHandler = \Drupal::moduleHandler();
 
-    $data = $moduleHandler->invokeAll($hookName);
-    $moduleHandler->alter($hookName, $data);
+      $data = $moduleHandler->invokeAll($hookName);
+      $moduleHandler->alter($hookName, $data);
 
-    return $data;
+      $this->hookData[$hookName] = $data;
+    }
+
+    return $this->hookData[$hookName];
   }
 }
