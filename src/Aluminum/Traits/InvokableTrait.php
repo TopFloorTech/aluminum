@@ -12,7 +12,7 @@ namespace Drupal\aluminum\Aluminum\Traits;
 trait InvokableTrait {
   protected $hookData = [];
 
-  protected function invokeHook($hookName) {
+  protected function invokeHook($hookName, $defaultItem = []) {
     if (!isset($this->hookData[$hookName])) {
       $moduleHandler = \Drupal::moduleHandler();
 
@@ -22,6 +22,14 @@ trait InvokableTrait {
       $this->hookData[$hookName] = $data;
     }
 
-    return $this->hookData[$hookName];
+    $data = $this->hookData[$hookName];
+
+    if (!empty($defaultItem)) {
+      foreach ($data as $id => $value) {
+        $data[$id] = $value + $defaultItem;
+      }
+    }
+
+    return $data;
   }
 }

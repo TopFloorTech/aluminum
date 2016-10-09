@@ -12,7 +12,7 @@ namespace Drupal\aluminum\Aluminum\Traits;
 trait StaticInvokableTrait {
   protected static $hookData = [];
 
-  protected static function invokeHook($hookName) {
+  protected static function invokeHook($hookName, $defaultItem = []) {
     if (!isset(self::$hookData[$hookName])) {
       $moduleHandler = \Drupal::moduleHandler();
 
@@ -22,6 +22,14 @@ trait StaticInvokableTrait {
       self::$hookData[$hookName] = $data;
     }
 
-    return self::$hookData[$hookName];
+    $data = self::$hookData[$hookName];
+
+    if (!empty($defaultItem)) {
+      foreach ($data as $id => $value) {
+        $data[$id] = $value + $defaultItem;
+      }
+    }
+
+    return $data;
   }
 }
