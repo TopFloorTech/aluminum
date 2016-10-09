@@ -2,6 +2,6 @@ aluminum_vault.admin:
   path: '/admin/config/development/aluminum/vault'
   defaults:
     _form: '\Drupal\aluminum_vault\Form\AluminumVaultSettingsForm'
-    _title: 'Aluminum Vault'
+    _title: 'Aluminum vault'
   requirements:
     _permission: 'administer aluminum'
