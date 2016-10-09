@@ -10,7 +10,7 @@ namespace Drupal\aluminum\Aluminum\Traits;
 
 
 trait InvokableTrait {
-  protected static function invokeHook($hookName) {
+  protected function invokeHook($hookName) {
     $moduleHandler = \Drupal::moduleHandler();
 
     $data = $moduleHandler->invokeAll($hookName);
