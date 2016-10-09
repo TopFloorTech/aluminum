@@ -10,7 +10,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 /**
  * Implements hook_help().
  */
-function spacelift_blocks_help($route_name, RouteMatchInterface $route_match) {
+function aluminum_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.aluminum':
       return check_markup(file_get_contents(dirname(__FILE__) . "/README.txt"));
