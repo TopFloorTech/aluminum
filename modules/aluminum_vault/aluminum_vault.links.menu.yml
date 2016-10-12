@@ -1,7 +1,0 @@
-aluminum_vault.admin:
-  title: 'Aluminum vault'
-  description: 'Manage Aluminum configuration'
-  parent: aluminum.admin
-  route_name: aluminum_vault.admin
-  weight: 100
-  menu_name: devel

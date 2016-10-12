@@ -1,8 +1,0 @@
-name: Aluminum Vault
-type: module
-description: 'Provides a common configuration interface used by Aluminum'
-version: 8.x-1.0-alpha1
-core: 8.x
-package: Aluminum
-dependencies:
-  - aluminum
