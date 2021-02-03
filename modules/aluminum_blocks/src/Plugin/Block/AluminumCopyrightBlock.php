@@ -25,6 +25,7 @@ class AluminumCopyrightBlock extends AluminumBlockBase {
             'copyright_text' => [
                 '#type' => 'textfield',
                 '#title' => $this->t('Copyright text'),
+                '#maxlength' => 256,
                 '#description' => $this->t('The text to display. You may use tokens such as [site:name] and [date:custom:Y].'),
                 '#default_value' => 'Copyright [date:custom:Y] [site:name]. All rights reserved.',
             ],
